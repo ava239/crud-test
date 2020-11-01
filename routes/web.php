@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\Social\GithubController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
@@ -15,7 +16,13 @@ use App\Http\Controllers\EmployeeController;
 |
 */
 
-Auth::routes();
+Route::get('/oauth/github', [GithubController::class, 'redirectToProvider'])->name('oauth.github');
+Route::get(
+    '/oauth/github/callback',
+    [GithubController::class, 'handleProviderCallback']
+)->name('oauth.github-callback');
+
+Auth::routes(['verify' => true]);
 
 Route::view('/', 'home')->name('home');
 
