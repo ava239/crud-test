@@ -44,7 +44,7 @@
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('layout.texts.login') }}</a>
+                            <a class="nav-link" href="{{ route('oauth.github') }}">{{ __('layout.texts.login') }}</a>
                         </li>
                     @else
                         <li class="nav-item dropdown">
