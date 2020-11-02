@@ -2,8 +2,8 @@
 @section('content')
     <div class="container">
         <h1 class="mb-5">{{ __('employees.title') }}</h1>
-        <div class="d-flex">
-            <div>
+        <div class="d-flex flex-sm-wrap row">
+            <div class="col-sm-12 col-md-9">
                 {{ BsForm::get(route('employees.index'), ['class' => 'form-inline']) }}
                 {{ BsForm::text('filter[name]', optional($filter)['name'])->attribute('class', 'form-control mr-2')->placeholder(__('employees.placeholder.filter_name')) }}
                 {{ BsForm::select('filter[role_id]', $roles, optional($filter)['role_id'])->attribute('class', 'form-control mr-2')->placeholder(__('employees.placeholder.choose_role')) }}
@@ -15,11 +15,13 @@
                 {{ BsForm::close() }}
             </div>
             @auth
-                <a href="{{ route('employees.create') }}"
-                   class="btn btn-primary ml-auto">{{ __('layout.buttons.add_new') }}</a>
+                <div class="col-sm-12 col-md-3 text-md-right">
+                    <a href="{{ route('employees.create') }}"
+                       class="btn btn-primary">{{ __('layout.buttons.add_new') }}</a>
+                </div>
             @endauth
         </div>
-        <table class="table mt-2">
+        <table class="table mt-2 table-responsive-md">
             <thead>
             <tr>
                 <th>{{ __('layout.headers.name') }}</th>
@@ -31,10 +33,11 @@
                 @endauth
             </tr>
             </thead>
+            <tbody>
             @foreach($employees as $employee)
                 <tr>
                     <td><a href="{{ route('employees.show', $employee) }}">{{ $employee->name }}</a></td>
-                    <td class="text-nowrap">{{ $employee->bio }}</td>
+                    <td class="text-truncate mw-bio">{{ $employee->bio }}</td>
                     <td>{{ optional($employee->role)->name }}</td>
                     <td>{{ $employee->salary }}</td>
                     @auth
@@ -54,6 +57,7 @@
                     @endauth
                 </tr>
             @endforeach
+            </tbody>
         </table>
 
         {{ $employees->links() }}
