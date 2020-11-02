@@ -19,7 +19,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
         "php-http/guzzle7-adapter": "^0.1.1",
-        "rollbar/rollbar-laravel": "^7.0"
+        "rollbar/rollbar-laravel": "^7.0",
+        "spatie/laravel-query-builder": "^3.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

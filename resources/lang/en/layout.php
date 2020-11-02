@@ -25,5 +25,12 @@ return [
         'name' => 'Name',
         'reset_password' => 'Reset Password',
         'send_reset_link' => 'Send Password Reset Link',
+    ],
+    'headers' => [
+        'name' => 'Name',
+        'bio' => 'Bio',
+        'role' => 'Role',
+        'salary' => 'Salary',
+        'actions' => 'Actions'
     ]
 ];

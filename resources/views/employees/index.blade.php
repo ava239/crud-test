@@ -1,54 +1,61 @@
 @extends('layouts.app')
 @section('content')
-
-    <div class="separator-breadcrumb border-top"></div>
-
-    <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-icon-bg card-icon-brght-bg-dark  o-hidden mb-4">
-                <div class="card-body text-center">
-                    <i class="i-Add-Window"></i>
-                    <div class="content">
-                        <a href="{{ route('employees.create') }}"><h4 class=" mt-2 mb-0">{{ __('layout.buttons.add_new') }}</h4></a>
-                    </div>
-                </div>
+    <div class="container">
+        <h1 class="mb-5">{{ __('employees.title') }}</h1>
+        <div class="d-flex">
+            <div>
+                {{ BsForm::get(route('employees.index'), ['class' => 'form-inline']) }}
+                {{ BsForm::text('filter[name]', optional($filter)['name'])->attribute('class', 'form-control mr-2')->placeholder(__('employees.placeholder.filter_name')) }}
+                {{ BsForm::select('filter[role_id]', $roles, optional($filter)['role_id'])->attribute('class', 'form-control mr-2')->placeholder(__('employees.placeholder.choose_role')) }}
+                {{ BsForm::submit(__('layout.buttons.apply'))->primary()->attribute('class', 'btn btn-outline-primary mr-2') }}
+                @if($filter)
+                    <a href="{{ route('employees.index') }}"
+                       class="btn btn-outline-danger">{{ __('layout.buttons.reset') }}</a>
+                @endif
+                {{ BsForm::close() }}
             </div>
+            @auth
+                <a href="{{ route('employees.create') }}"
+                   class="btn btn-primary ml-auto">{{ __('layout.buttons.add_new') }}</a>
+            @endauth
         </div>
-    </div>
-
-
-    <div class="row">
-        @foreach($employees as $employee)
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 ">
-                <div class="card object-card bg-dark overlay-dark text-white o-hidden mb-4">
-                    <div class="card-img-overlay">
-                        <div class="text-center pt-4">
-                            <a href="{{ route('employees.show', $employee) }}">
-                                <h5 class="card-title mb-2 text-white">
-                                    {{ $employee->name }}
-                                </h5>
-                            </a>
-                            <p class="card-subtitle">{{ $employee->bio }}</p>
-                            <div class="separator border-top mb-2"></div>
-                        </div>
-                        <div class="p-1 card-footer font-weight-light d-flex text-center">
+        <table class="table mt-2">
+            <thead>
+            <tr>
+                <th>{{ __('layout.headers.name') }}</th>
+                <th>{{ __('layout.headers.bio') }}</th>
+                <th>{{ __('layout.headers.role') }}</th>
+                <th>{{ __('layout.headers.salary') }}</th>
+                @auth
+                    <th>{{ __('layout.headers.actions') }}</th>
+                @endauth
+            </tr>
+            </thead>
+            @foreach($employees as $employee)
+                <tr>
+                    <td><a href="{{ route('employees.show', $employee) }}">{{ $employee->name }}</a></td>
+                    <td class="text-nowrap">{{ $employee->bio }}</td>
+                    <td>{{ optional($employee->role)->name }}</td>
+                    <td>{{ $employee->salary }}</td>
+                    @auth
+                        <td>
                             @can('update', $employee)
-                            <a class="btn btn-primary text-white btn-rounded"
-                               href="{{ route('employees.edit', $employee) }}">{{ __('layout.buttons.edit') }}</a>
+                                <a href="{{ route('employees.edit', $employee) }}">
+                                    {{ __('layout.buttons.edit') }}
+                                </a>
                             @endcan
                             @can('delete', $employee)
-                            <a href="{{ route('employees.destroy', $employee) }}"
-                               class="btn btn-danger text-white btn-rounded" data-confirm="{{ __('layout.texts.confirmation') }}"
-                               data-method="delete" rel="nofollow">
-                                {{ __('layout.buttons.remove') }}
-                            </a>
+                                <a href="{{ route('employees.destroy', $employee) }}"
+                                   data-confirm="{{ __('layout.texts.confirmation') }}"
+                                   data-method="delete" rel="nofollow" class="text-danger">
+                                    {{ __('layout.buttons.remove') }}</a>
                             @endcan
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
+                        </td>
+                    @endauth
+                </tr>
+            @endforeach
+        </table>
 
-    {{ $employees->links() }}
+        {{ $employees->links() }}
+    </div>
 @endsection

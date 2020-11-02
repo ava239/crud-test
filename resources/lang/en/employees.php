@@ -10,5 +10,9 @@ return [
         'created' => 'Employee has been added',
         'updated' => 'Employee has been updated',
         'deleted' => 'Employee has been deleted',
+    ],
+    'placeholder' => [
+        'choose_role' => 'Choose role',
+        'filter_name' => 'Search name',
     ]
 ];
