@@ -1,6 +1,9 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/73d137ffbcc2d556b0e9/maintainability)](https://codeclimate.com/github/ava239/crud-test/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/73d137ffbcc2d556b0e9/test_coverage)](https://codeclimate.com/github/ava239/crud-test/test_coverage)
 
+# Demo
+https://crud-test-ah.herokuapp.com/
+
 # Setup
 Server will be available at http://localhost:8000/ (same if you choose to run it in Docker)
 ### Local SQLite
