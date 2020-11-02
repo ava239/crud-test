@@ -35,6 +35,12 @@ $ make compose-migrate
 ```
 There are few commands in Makefile to help you with this setup later.
 
+# Test data
+To seed database with test data (needed for local authorization) run seed command if you haven't already
+``` sh
+$ php artisan db:seed
+```
+
 # Requirements
 - PHP 7.4
 - Extensions:
