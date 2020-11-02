@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\Social\GithubController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,7 @@ Route::get(
     '/oauth/github/callback',
     [GithubController::class, 'handleProviderCallback']
 )->name('oauth.github-callback');
+Route::post('/dev-login', [LoginController::class, 'devLogin'])->name('auth.dev-login');
 
 Auth::routes();
 

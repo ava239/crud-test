@@ -36,13 +36,21 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <li><a class="nav-link @if(Route::is('employees.index'))active @endif" href="{{ route('employees.index') }}">{{ __('employees.menu_link') }}</a></li>
+                    <li><a class="nav-link @if(Route::is('employees.index'))active @endif"
+                           href="{{ route('employees.index') }}">{{ __('employees.menu_link') }}</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     @guest
+                        @if(app()->environment('local'))
+                            <li>
+                                <a href="{{ route('auth.dev-login') }}" class="nav-link" data-method="post">
+                                    {{ __('layout.texts.dev_login') }}
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('oauth.github') }}">{{ __('layout.texts.login') }}</a>
                         </li>
