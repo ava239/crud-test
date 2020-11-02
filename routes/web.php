@@ -22,7 +22,7 @@ Route::get(
     [GithubController::class, 'handleProviderCallback']
 )->name('oauth.github-callback');
 
-Auth::routes(['verify' => true]);
+Auth::routes();
 
 Route::view('/', 'home')->name('home');
 

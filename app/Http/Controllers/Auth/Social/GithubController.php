@@ -68,7 +68,7 @@ class GithubController extends Controller
         Auth::login($user, true);
         flash()->success(__('auth.logged_in'));
 
-        return redirect()->route('my');
+        return redirect()->route('home');
     }
 
     private function sendFailedResponse($msg = null): RedirectResponse
